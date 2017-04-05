@@ -41,11 +41,12 @@ public class PersonControllerTest {
     @Test
     public void getPersonTest() throws Exception{
         Mockito.when(personService.getPersson(Mockito.anyString())).thenReturn(p1);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons/get/Cholasery").accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons/get/Cholasery")
+                .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         System.out.println("Result :" + result.getResponse().getContentAsString());
-        String exppected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
-        JSONAssert.assertEquals(exppected,result.getResponse().getContentAsString(),false);
+        String expected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
+        JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 
     }
 
@@ -53,11 +54,13 @@ public class PersonControllerTest {
     @Test
     public void searchPersonTest() throws Exception{
         Mockito.when(personService.getPersson(Mockito.anyString())).thenReturn(p1);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/persons/search").accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/persons/search")
+                .param("lastname","Cholasery")
+                .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         System.out.println("Result :" + result.getResponse().getContentAsString());
-        String exppected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
-        JSONAssert.assertEquals(exppected,result.getResponse().getContentAsString(),false);
+        String expected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
+        JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 
     }
 

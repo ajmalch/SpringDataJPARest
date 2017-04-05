@@ -33,7 +33,7 @@ public class OrganizationControllerTest {
 
 
 
-    private Organization o1 = new Organization("cliebntIdtest", LocalDate.of(2016, 04, 01),
+    private Organization o1 = new Organization("clientIdtest", LocalDate.of(2016, 04, 01),
             10L,"fis",LocalDate.of(2025,12,31),
             "FIS","FIS Global");
 
@@ -42,7 +42,7 @@ public class OrganizationControllerTest {
         Mockito.when(organizationService.findByShortname(Mockito.anyString())).thenReturn(o1);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/organizations/get/FIS").accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String expected = "{\"clientId\":\"cliebntIdtest\",\"orgname\":\"FIS Global\"}";
+        String expected = "{\"clientId\":\"clientIdtest\",\"orgname\":\"FIS Global\"}";
 
         JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
     }
