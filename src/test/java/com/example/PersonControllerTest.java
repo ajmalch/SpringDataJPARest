@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.controller.PersonController;
 import com.example.model.Person;
+import com.example.model.SimplePerson;
 import com.example.service.PersonService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +45,7 @@ public class PersonControllerTest {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons/get/Cholasery")
                 .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        System.out.println("Result :" + result.getResponse().getContentAsString());
+//        System.out.println("Result :" + result.getResponse().getContentAsString());
         String expected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
         JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 
@@ -58,10 +59,52 @@ public class PersonControllerTest {
                 .param("lastname","Cholasery")
                 .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        System.out.println("Result :" + result.getResponse().getContentAsString());
+//        System.out.println("Result :" + result.getResponse().getContentAsString());
         String expected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
         JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
 
     }
 
+    @Test
+    public void updatePersonTest() throws Exception{
+
+        Person p2 = new Person( "cliebntIdTest", LocalDate.of(2013, 01, 01),
+                10L,"test",LocalDate.of(2020,12,31),
+                "Aqila", "Cholasery",LocalDate.of(1985, 01, 24),
+                Person.SEX.FEMALE);
+        Mockito.when(personService.updatePerson(Mockito.anyString(),Mockito.anyString())).thenReturn(p2);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/persons/update/cholasery")
+                .param("firstname","Aqila")
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+//        System.out.println("Result :" + result.getResponse().getContentAsString());
+        String expected = "{\"firstname\":\"Aqila\", \"lastname\" : \"Cholasery\"}";
+        JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
+
+    }
+
+
+
+    @Test
+    public void getSimplePersonTest() throws Exception{
+        Mockito.when(personService.getSimpleperson(Mockito.anyString())).thenReturn(new SimplePerson() {
+            @Override
+            public String getLastname() {
+                return "Cholasery";
+            }
+
+            @Override
+            public String getFirstname() {
+                return "Maliha";
+            }
+        });
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons/getsimple/cholasery")
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        String expected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
+        JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
+
+    }
 }
