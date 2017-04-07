@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.model.Organization;
 import com.example.service.OrganizationService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by AjmalCholassery on 3/26/17.
  */
-@Data
 @RestController
 @RequestMapping(path = "/organizations")
 public class OrganizationRestController {
