@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.controller.PersonController;
+import com.example.controller.PersonRestController;
 import com.example.model.Person;
 import com.example.model.SimplePerson;
 import com.example.service.PersonService;
@@ -24,8 +24,8 @@ import java.time.LocalDate;
  * Created by AjmalCholassery on 4/3/17.
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = PersonController.class,secure = false)
-public class PersonControllerTest {
+@WebMvcTest(value = PersonRestController.class,secure = false)
+public class PersonRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

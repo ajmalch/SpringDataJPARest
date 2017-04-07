@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(path = "/persons")
-public class PersonController{
+public class PersonRestController {
 
     @Autowired
     private PersonService personService;

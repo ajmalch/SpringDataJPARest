@@ -11,7 +11,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(
         {
                 DemoApplicationTests.class,
-                PersonControllerTest.class,
+                PersonRestControllerTest.class,
                 OrganizationRestControllerTest.class
         })
 public class JunitTestSuite {
