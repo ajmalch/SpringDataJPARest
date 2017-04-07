@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Data
 @RestController
 @RequestMapping(path = "/organizations")
-public class OrganizationController {
+public class OrganizationRestController {
 
     @Autowired
     OrganizationService organizationService;
@@ -25,6 +25,5 @@ public class OrganizationController {
     public Organization getOrganization(@PathVariable String shortname){
         return organizationService.findByShortname(shortname);
     }
-
 
 }

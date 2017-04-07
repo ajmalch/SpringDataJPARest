@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.controller.OrganizationController;
+import com.example.controller.OrganizationRestController;
 import com.example.model.Organization;
 import com.example.service.OrganizationService;
 import org.junit.Test;
@@ -22,9 +22,9 @@ import java.time.LocalDate;
 /**
  * Created by AjmalCholassery on 4/3/17.
  */
-@WebMvcTest(value = OrganizationController.class,secure = false)
+@WebMvcTest(value = OrganizationRestController.class,secure = false)
 @RunWith(SpringRunner.class)
-public class OrganizationControllerTest {
+public class OrganizationRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

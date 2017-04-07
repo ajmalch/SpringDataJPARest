@@ -19,4 +19,8 @@ public class OrganizationService {
         return repository.findByShortname(shortname, Organization.class);
 
     }
+
+    public Iterable<Organization> getAllOrganizations(){
+        return  repository.findAll();
+    }
 }

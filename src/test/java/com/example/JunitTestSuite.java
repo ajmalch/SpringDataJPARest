@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
         {
                 DemoApplicationTests.class,
                 PersonControllerTest.class,
-                OrganizationControllerTest.class
+                OrganizationRestControllerTest.class
         })
 public class JunitTestSuite {
 }
