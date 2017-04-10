@@ -3,3 +3,6 @@ spring:
     show-sql: true
   thymeleaf:
     cache: false
+  data:
+    rest:
+      detection-strategy: default

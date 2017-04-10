@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 /**
  * Created by AjmalCholassery on 3/25/17.
  */
-@RepositoryRestResource(path = "/people")
+@RepositoryRestResource(path = "/people",exported = false)
 public interface PersonRepository extends CrudRepository<Person,Long> {
 //    Person findByLastname(String lastname);
 
