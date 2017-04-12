@@ -47,8 +47,11 @@ public class DemoApplication {
 					10L,"fis",LocalDate.of(2025,12,31),
             		"FIS","FIS Global"));
 			repo.save(new Organization("cliebntId4", LocalDate.of(2011, 12, 01),
-					10L,"fis",null,
+					10L,"sis",null,
 					"SIS","Sungard Insurance System"));
+			repo.save(new Organization("cliebntId5", LocalDate.of(2017, 01, 11),
+					10L,"fb",null,
+					"FB","Face Book"));
 //            repo.save(new Organization("FIS","FIS Global"));
 //            repo.save(new Organization("SIS","Sungard Insurance System"));
         };

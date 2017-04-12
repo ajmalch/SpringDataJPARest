@@ -6,3 +6,4 @@ spring:
   data:
     rest:
       detection-strategy: default
+      max-page-size: 2
