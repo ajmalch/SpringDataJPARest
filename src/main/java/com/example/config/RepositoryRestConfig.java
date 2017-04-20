@@ -1,4 +1,4 @@
-package com.example;
+package com.example.config;
 
 import com.example.model.Organization;
 import com.example.model.Person;
