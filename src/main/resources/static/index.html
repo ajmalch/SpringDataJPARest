@@ -20,7 +20,7 @@
     <div class="container" ng-show="home.authenticated">
         Logged in as <span ng-bind="home.user"/>
     </div>
-    <div ng-click="home.logout()" class="btn btn-primary">Logout</div>
+    <div ng-click="home.logout()"  ng-show="home.authenticated" class="btn btn-primary">Logout</div>
     <script type="text/javascript">
         angular.module("app", []).controller("home", function($http) {
             var self = this;
