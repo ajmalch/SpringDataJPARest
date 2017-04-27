@@ -1,12 +1,18 @@
 package com.example.model;
 
 
+import com.example.utility.json.LocalDateDeserializer;
+import com.example.utility.json.LocalDateSerializer;
+import com.example.utility.xml.LocalDateAdapter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 
@@ -30,6 +36,10 @@ public class Person extends Party {
     private Long nameid;
     private String firstname;
     private final String lastname;
+
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private final LocalDate birthdt;
     private final SEX sex;
 

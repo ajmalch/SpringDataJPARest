@@ -1,6 +1,10 @@
 package com.example.model;
 
-import com.example.utility.LocalDateAdapter;
+import com.example.utility.json.LocalDateDeserializer;
+import com.example.utility.json.LocalDateSerializer;
+import com.example.utility.xml.LocalDateAdapter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +32,18 @@ abstract class Party {
 
     @XmlElement
     private final String clientId;
+
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private final LocalDate effectdt;
+
     private final Long auditid;
     private final String searchkey;
+
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private final LocalDate xpirdt;
 
 }
