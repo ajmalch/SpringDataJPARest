@@ -25,7 +25,7 @@ angular.module('crudApp').controller('PersonController',
 
         function submit() {
             console.log('Submitting');
-            if (self.person.id === undefined || self.person.id === null) {
+            if (self.person.nameid === undefined || self.person.nameid === null) {
                 console.log('Saving New Person', self.person);
                 createPerson(self.person);
             } else {
@@ -45,6 +45,7 @@ angular.module('crudApp').controller('PersonController',
                         self.done = true;
                         self.person={};
                         $scope.myForm.$setPristine();
+
                     },
                     function (errResponse) {
                         console.error('Error while creating Person');
@@ -64,6 +65,8 @@ angular.module('crudApp').controller('PersonController',
                         self.successMessage='Person updated successfully';
                         self.errorMessage='';
                         self.done = true;
+                        self.edit = false;
+                        self.person={};
                         $scope.myForm.$setPristine();
                     },
                     function(errResponse){
