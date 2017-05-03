@@ -25,11 +25,11 @@ public class DemoApplication {
 	public CommandLineRunner demoPerson(PersonRepository repo){
 		return (s)->{
 
-			repo.save(new Person( "cliebntId1", LocalDate.of(2012, 01, 01),
+			repo.save(new Person( "clientId1", LocalDate.of(2012, 01, 01),
 					10L,"ajmal",LocalDate.of(2020,12,31),
 					"Ajmal", "Cholassery",LocalDate.of(1985, 01, 24),
 					Person.SEX.MALE));
-			repo.save(new Person( "cliebntId2", LocalDate.of(2013, 01, 01),
+			repo.save(new Person( "clientId2", LocalDate.of(2013, 01, 01),
 					10L,"frank",LocalDate.of(2020,10,31),
 					"Frank", "Lyons",LocalDate.of(1955, 01, 24),
 					Person.SEX.MALE));
@@ -43,13 +43,13 @@ public class DemoApplication {
 	@Profile(value = "dev")
     public CommandLineRunner demoOrganization(OrganizationRepository repo){
         return (s)->{
-            repo.save(new Organization("cliebntId3", LocalDate.of(2016, 04, 01),
+            repo.save(new Organization("cliebtId3", LocalDate.of(2016, 04, 01),
 					10L,"fis",LocalDate.of(2025,12,31),
             		"FIS","FIS Global"));
-			repo.save(new Organization("cliebntId4", LocalDate.of(2011, 12, 01),
+			repo.save(new Organization("clientId4", LocalDate.of(2011, 12, 01),
 					10L,"sis",null,
 					"SIS","Sungard Insurance System"));
-			repo.save(new Organization("cliebntId5", LocalDate.of(2017, 01, 11),
+			repo.save(new Organization("clientId5", LocalDate.of(2017, 01, 11),
 					10L,"fb",null,
 					"FB","Face Book"));
 //            repo.save(new Organization("FIS","FIS Global"));

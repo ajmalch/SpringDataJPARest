@@ -31,6 +31,7 @@ abstract class Party {
     private Long nameid;
 
     @XmlElement
+    @Column(unique = true, nullable = false)
     private final String clientId;
 
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
