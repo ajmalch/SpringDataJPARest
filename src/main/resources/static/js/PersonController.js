@@ -29,8 +29,8 @@ angular.module('crudApp').controller('PersonController',
                 console.log('Saving New Person', self.person);
                 createPerson(self.person);
             } else {
-                updatePerson(self.person, self.person.id);
-                console.log('Person updated with id ', self.person.id);
+                updatePerson(self.person, self.person.lastname);
+                console.log('Person updated with id ', self.person.lastname);
             }
         }
 
@@ -80,15 +80,15 @@ angular.module('crudApp').controller('PersonController',
 
         function removePerson(id){
             console.log('About to remove Person with id '+id);
-            PersonService.removePerson(id)
-                .then(
-                    function(){
-                        console.log('Person '+id + ' removed successfully');
-                    },
-                    function(errResponse){
-                        console.error('Error while removing Person '+id +', Error :'+errResponse.data);
-                    }
-                );
+	    	 PersonService.removePerson(id)
+	         .then(
+	             function(response){
+	                 console.log('Person '+id + ' removed successfully');
+	             },
+	             function(errResponse){
+	                 console.error('Error while removing Person '+id +', Error :'+errResponse.data);
+	             }
+	         );        
         }
 
 
@@ -101,11 +101,12 @@ angular.module('crudApp').controller('PersonController',
             self.errorMessage='';
             PersonService.getPerson(id).then(
                 function (Person) {
+                	console.log("Person with Id " + id +" has been fetched for editing")
                     self.person = Person;
                     self.edit = true;
                 },
                 function (errResponse) {
-                    console.error('Error while removing Person ' + id + ', Error :' + errResponse.data);
+                    console.error('Error while fetching Person ' + id + ', Error :' + errResponse.data);
                 }
             );
         }
