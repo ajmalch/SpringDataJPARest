@@ -38,3 +38,4 @@ src/main/java/META-INF/
 /target/test-classes/
 /target/generated-test-sources/
 /target/classes/
+/target/docker/
