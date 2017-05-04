@@ -1,0 +1,31 @@
+spring:
+  jpa:
+    show-sql: true
+  thymeleaf:
+    cache: false
+  data:
+    rest:
+      detection-strategy: default
+      max-page-size: 2
+#security:
+#  oauth2:
+facebook:
+    client:
+      client-secret: aaf853ae0abb5cc9f448ebf66a6689b2
+      access-token-uri: https://graph.facebook.com/oauth/access_token
+      user-authorization-uri: https://www.facebook.com/dialog/oauth
+      token-name: oauth_token
+      authentication-scheme: query
+      client-authentication-scheme: form
+      client-id: 1391413134262958
+    resource:
+      user-info-uri: https://graph.facebook.com/me
+github:
+  client:
+    clientId: 7a2b26249f8c43aa5b45
+    clientSecret: 4b1045ee7bdcc678d6e5747da1812c0bfc14c9b5
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user

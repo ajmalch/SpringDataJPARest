@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Companies</title>
+</head>
+<body>
+<table border="1" bgcolor="#add8e6">
+    <tr>
+        <th>CLIENT_ID</th>
+        <th>SHORT NAME</th>
+        <th>ORGANIZATION NAME</th>
+    </tr>
+    <tr th:each="org : ${companies}">
+        <td th:text="${org.clientId}">Client ID</td>
+        <td th:text="${org.shortname}">Short Name</td>
+        <td th:text="${org.orgname}">Orgnization Name</td>
+    </tr>
+</table>
+</body>
+</html>

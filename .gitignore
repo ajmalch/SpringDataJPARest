@@ -29,3 +29,13 @@ nbdist/
 
 src/main/java/META-INF/
 
+
+/target/surefire-reports/
+/target/maven-status/
+/target/spring-data-rest-1.0.0.jar.original
+/target/generated-sources/
+/target/maven-archiver/
+/target/test-classes/
+/target/docker/
+/target/generated-test-sources/
+/target/classes/
