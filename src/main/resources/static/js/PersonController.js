@@ -84,6 +84,7 @@ angular.module('crudApp').controller('PersonController',
 	         .then(
 	             function(response){
 	                 console.log('Person '+id + ' removed successfully');
+                     self.successMessage='Person removed successfully';
 	             },
 	             function(errResponse){
 	                 console.error('Error while removing Person '+id +', Error :'+errResponse.data);

@@ -33,7 +33,7 @@ public class Person extends Party {
     }
 //    @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
-    private Long nameid;
+//    private Long nameid;
     private String firstname;
     private final String lastname;
 
