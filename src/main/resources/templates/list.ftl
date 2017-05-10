@@ -7,7 +7,7 @@
 	            <div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
 					<div class="alert alert-danger" role="alert" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
 	            <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-	                <input type="hidden" ng-model="ctrl.person.clientId" />
+	                <input type="hidden" ng-model="ctrl.edit" />
 	                <div class="row">
 						<div class="form-group col-md-12" ng-class="{ 'has-error' : myForm.clientId.$invalid && !myForm.clientId.$pristine }">
 							<label class="col-md-2 control-lable" for="clientid">Client ID</label>
@@ -78,7 +78,7 @@
 		                <td>{{u.firstname}}</td>
 		                <td>{{u.lastname}}</td>
 		                <td>{{u.sex}}</td>
-		                <td><button type="button" ng-click="ctrl.editPerson(u.lastname)" class="btn btn-success custom-width">Edit</button></td>
+		                <td><button type="button" ng-click="ctrl.editPerson(u.lastname) ; ctrl.edit=true" class="btn btn-success custom-width">Edit</button></td>
 		                <td><button type="button" ng-click="ctrl.removePerson(u.lastname)" class="btn btn-danger custom-width">Remove</button></td>
 		            </tr>
 		            </tbody>
