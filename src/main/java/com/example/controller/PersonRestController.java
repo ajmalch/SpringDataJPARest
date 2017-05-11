@@ -40,6 +40,6 @@ public class PersonRestController {
 
     @PostMapping(path="/webhook")
     public String webhookCallBack(@RequestBody String input){
-        return input;
+        return null;
     }
 }
