@@ -42,4 +42,16 @@ public class PersonRestController {
     public String webhookCallBack(@RequestBody String input){
         return null;
     }
+
+    @GetMapping(path="/webhook")
+    public String webhookGetCallBack(
+            @RequestParam("hub.mode") String hubMode,
+            @RequestParam("hub.challenge") String hubChallenge,
+            @RequestParam("hub.verify_token") String hubVerifyToken){
+
+        if(hubVerifyToken.equals("ajmal_fb_webhook"))
+            return hubChallenge;
+        else
+            return null;
+    }
 }
