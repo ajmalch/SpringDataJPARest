@@ -25,7 +25,7 @@ angular.module('crudApp').controller('PersonController',
 
         function submit() {
             console.log('Submitting');
-            if (self.edit === undefined || self.edit === null) {
+            if (self.edit == false || self.edit === undefined || self.edit === null ) {
                 console.log('Saving New Person', self.person);
                 createPerson(self.person);
             } else {
