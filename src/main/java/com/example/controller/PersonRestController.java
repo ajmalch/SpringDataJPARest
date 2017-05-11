@@ -37,4 +37,9 @@ public class PersonRestController {
     public Person updatePerson(@RequestParam String firstname, @PathVariable String lastname){
        return personService.updatePerson(firstname,lastname);
     }
+
+    @PostMapping(path="/webhook")
+    public String webhookCallBack(@RequestBody String input){
+        return input;
+    }
 }
