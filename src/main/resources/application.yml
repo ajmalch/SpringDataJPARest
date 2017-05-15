@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    active: dev
+
   jpa:
     show-sql: true
   thymeleaf:
@@ -7,6 +10,7 @@ spring:
     rest:
       detection-strategy: default
       max-page-size: 2
+
 #security:
 #  oauth2:
 facebook:
@@ -29,3 +33,11 @@ github:
     clientAuthenticationScheme: form
   resource:
     userInfoUri: https://api.github.com/user
+
+---
+
+spring:
+  profiles: dev
+  jpa:
+    database-platform: H2
+
