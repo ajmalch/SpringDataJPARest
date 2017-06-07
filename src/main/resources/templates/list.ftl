@@ -78,8 +78,8 @@
 		                <td>{{u.firstname}}</td>
 		                <td>{{u.lastname}}</td>
 		                <td>{{u.sex}}</td>
-		                <td><button type="button" ng-click="ctrl.editPerson(u.lastname)" class="btn btn-success custom-width">Edit</button></td>
-		                <td><button type="button" ng-click="ctrl.removePerson(u.lastname)" class="btn btn-danger custom-width">Remove</button></td>
+		                <td><button type="button" ng-click="ctrl.editPerson(u._links.self.href)" class="btn btn-success custom-width">Edit</button></td>
+		                <td><button type="button" ng-click="ctrl.removePerson(u._links.self.href)" class="btn btn-danger custom-width">Remove</button></td>
 		            </tr>
 		            </tbody>
 		        </table>		

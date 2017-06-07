@@ -37,17 +37,17 @@ angular.module('crudApp').factory('PersonService',
                 return $localStorage.Persons;
             }
 
-            function getPerson(id) {
-                console.log('Fetching Person with id :'+id);
+            function getPerson(link) {
+                console.log('Fetching Person :'+ link);
                 var deferred = $q.defer();
-                $http.get(urls.PERSON_SERVICE_API + id)
+                $http.get(link)
                     .then(
                         function (response) {
-                            console.log('Fetched successfully Person with id :'+id);
+                            console.log('Fetched successfully Person :'+ link);
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while loading Person with id :'+id);
+                            console.error('Error while loading Person :'+ link);
                             deferred.reject(errResponse);
                         }
                     );
@@ -71,10 +71,10 @@ angular.module('crudApp').factory('PersonService',
                 return deferred.promise;
             }
 
-            function updatePerson(Person, id) {
-                console.log('Updating Person with id '+id);
+            function updatePerson(Person, link) {
+                console.log('Updating Person with link '+link);
                 var deferred = $q.defer();
-                $http.put(urls.PERSON_SERVICE_API + id, Person)
+                $http.put(link, Person)
                     .then(
                         function (response) {
                             loadAllPersons();
@@ -88,17 +88,17 @@ angular.module('crudApp').factory('PersonService',
                 return deferred.promise;
             }
 
-            function removePerson(id) {
-                console.log('Removing Person with id '+id);
+            function removePerson(link) {
+                console.log('Removing Person with link '+link);
                 var deferred = $q.defer();
-                $http.delete(urls.PERSON_SERVICE_API + id)
+                $http.delete(link)
                     .then(
                         function (response) {
                             loadAllPersons();
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while removing Person with id :'+id);
+                            console.error('Error while removing Person :'+link);
                             deferred.reject(errResponse);
                         }
                     );

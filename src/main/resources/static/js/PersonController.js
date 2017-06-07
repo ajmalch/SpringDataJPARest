@@ -29,8 +29,8 @@ angular.module('crudApp').controller('PersonController',
                 console.log('Saving New Person', self.person);
                 createPerson(self.person);
             } else {
-                updatePerson(self.person, self.person.lastname);
-                console.log('Person updated with id ', self.person.lastname);
+                updatePerson(self.person, self.person._links.self.href);
+                console.log('Person updated with link ', self.person._links.self.href);
             }
         }
 
@@ -56,9 +56,9 @@ angular.module('crudApp').controller('PersonController',
         }
 
 
-        function updatePerson(Person, id){
+        function updatePerson(Person, link){
             console.log('About to update Person');
-            PersonService.updatePerson(Person, id)
+            PersonService.updatePerson(Person, link)
                 .then(
                     function (response){
                         console.log('Person updated successfully');
@@ -78,16 +78,16 @@ angular.module('crudApp').controller('PersonController',
         }
 
 
-        function removePerson(id){
-            console.log('About to remove Person with id '+id);
-	    	 PersonService.removePerson(id)
+        function removePerson(link){
+            console.log('About to remove Person  '+link);
+	    	 PersonService.removePerson(link)
 	         .then(
 	             function(response){
-	                 console.log('Person '+id + ' removed successfully');
+	                 console.log('Person removed successfully');
                      self.successMessage='Person removed successfully';
 	             },
 	             function(errResponse){
-	                 console.error('Error while removing Person '+id +', Error :'+errResponse.data);
+	                 console.error('Error while removing Person '+link +', Error :'+errResponse.data);
 	             }
 	         );        
         }
@@ -97,12 +97,12 @@ angular.module('crudApp').controller('PersonController',
             return PersonService.getAllPersons();
         }
 
-        function editPerson(id) {
+        function editPerson(link) {
             self.successMessage='';
             self.errorMessage='';
-            PersonService.getPerson(id).then(
+            PersonService.getPerson(link).then(
                 function (Person) {
-                	console.log("Person with Id " + id +" has been fetched for editing")
+                	console.log("Person " + link +" has been fetched for editing")
                     self.person = Person;
                     self.edit = true;
                 },

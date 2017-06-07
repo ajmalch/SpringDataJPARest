@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.exception.ResourceNotFoundException;
 import com.example.model.Person;
 import com.example.repository.PersonRepository;
 import org.junit.Assert;
@@ -29,7 +30,7 @@ public class DemoApplicationTests {
 				10L,"test",LocalDate.of(2020,12,31),
 				"Maliha", "Cholasery",LocalDate.of(1985, 01, 24),
 				Person.SEX.FEMALE));
-		Person p2 = repo.findByLastname("Cholasery",Person.class);
+		Person p2 = repo.findByLastname("Cholasery",Person.class).orElseThrow(()->new ResourceNotFoundException("Person Not Found"));
 		Assert.assertNotNull(p1.getNameid());
 //		Assert.assertEquals("Save Success", java.util.Optional.of(10L), java.util.Optional.ofNullable(p2.getAuditid()));
 	}
