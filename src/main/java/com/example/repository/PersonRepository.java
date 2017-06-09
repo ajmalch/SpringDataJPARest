@@ -18,7 +18,9 @@ public interface PersonRepository extends CrudRepository<Person,Long>, QueryByEx
 
 
 //    Person findByLastname(String lastname);
-    <T> Optional<T> findByLastname(String lastname, Class<T> projection);
+  <T> Optional<T> findByLastname(String lastname, Class<T> projection);
+
+    Optional<Person> findByLastname(String lastname);
 
     Optional<Person> findByFirstname(String firstname);
 

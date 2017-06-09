@@ -1,9 +1,11 @@
-package com.example;
+package com.example.controller;
 
-import com.example.controller.PersonRestController;
 import com.example.model.Person;
 import com.example.model.SimplePerson;
 import com.example.service.PersonService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -19,6 +21,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by AjmalCholassery on 4/3/17.
@@ -54,14 +58,28 @@ public class PersonRestControllerTest {
 
     @Test
     public void searchPersonTest() throws Exception{
-        Mockito.when(personService.getPersson(Mockito.anyString())).thenReturn(p1);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Person person = new Person();
+        person.setFirstname("Maliha");
+
+        List<Person> personList = new ArrayList<>();
+        personList.add(p1);
+
+        Mockito.when(personService.searchPersson(Mockito.anyObject())).thenReturn(personList);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/persons/search")
-                .param("lastname","Cholasery")
+                .content(mapper.writeValueAsString(person)).contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-//        System.out.println("Result :" + result.getResponse().getContentAsString());
-        String expected = "{\"firstname\":\"Maliha\", \"lastname\" : \"Cholasery\"}";
-        JSONAssert.assertEquals(expected,result.getResponse().getContentAsString(),false);
+        System.out.println("Result :" + result.getResponse().getContentAsString());
+
+        TypeReference<List<Person>> personListRef = new TypeReference<List<Person>>() {};
+        List<Person> resultList = mapper.readValue(result.getResponse().getContentAsString(),personListRef);
+
+        Assert.assertEquals(resultList.size(), 1 );
+
+
+        Assert.assertEquals( p1.getLastname(),resultList.get(0).getLastname());
 
     }
 

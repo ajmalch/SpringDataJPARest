@@ -27,7 +27,7 @@ public class PersonService {
     }
 
     public Person updatePerson(String firstname, String lastname){
-        Person p = repository.findByLastname(lastname,Person.class).orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
+        Person p = repository.findByLastname(lastname).orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
         p.setFirstname(firstname);
         return repository.save(p);
     }

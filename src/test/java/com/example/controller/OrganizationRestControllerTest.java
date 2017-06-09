@@ -1,6 +1,5 @@
-package com.example;
+package com.example.controller;
 
-import com.example.controller.OrganizationRestController;
 import com.example.model.Organization;
 import com.example.service.OrganizationService;
 import org.junit.Test;
