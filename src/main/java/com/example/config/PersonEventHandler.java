@@ -13,6 +13,6 @@ public class PersonEventHandler {
 
     @HandleBeforeDelete
     public void onBeforeDelete(Person p){
-        throw new DeleteNotAllowedException("Person Delete not Alloweed");
+        throw new DeleteNotAllowedException("Person Delete not Allowed");
     }
 }

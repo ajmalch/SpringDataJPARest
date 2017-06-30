@@ -2,11 +2,12 @@ package com.example.service;
 
 import com.example.exception.ResourceNotFoundException;
 import com.example.model.Person;
-import com.example.model.SimplePerson;
 import com.example.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 /**
@@ -18,16 +19,17 @@ public class PersonService {
     @Autowired
     private PersonRepository repository;
 
-    public Person getPersson(String firstname){
-        return repository.findByFirstname(firstname).orElseThrow(()->new ResourceNotFoundException("Person with first name " +firstname+ " Not Found"));
-    }
-
-    public SimplePerson getSimpleperson(String lastname){
-        return repository.findByLastname(lastname, SimplePerson.class).orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
+    public <T> T getPersonByLastName(String lastname, Class<T> projection){
+        Optional<T> person = Optional.ofNullable(repository.findByLastname(lastname, projection));
+        return person.orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
     }
 
     public Person updatePerson(String firstname, String lastname){
-        Person p = repository.findByLastname(lastname).orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
+        Optional<Person> person = Optional.ofNullable(repository.findByLastname(lastname,Person.class));
+
+        Person p = person.orElseThrow(
+                ()-> new ResourceNotFoundException("Person with lastname " + lastname + " not found"));
+
         p.setFirstname(firstname);
         return repository.save(p);
     }

@@ -2,6 +2,7 @@ package com.example.config;
 
 import com.example.model.Organization;
 import com.example.repository.OrganizationRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
@@ -27,10 +28,10 @@ public class RepositoryRestConfig extends RepositoryRestConfigurerAdapter {
                         ((organizationRepository, s) -> organizationRepository.findByShortname(s,Organization.class)));
     }
 
-//    @Bean
-//    PersonEventHandler personEventHandler() {
-//        return new PersonEventHandler();
-//    }
+    @Bean
+    PersonEventHandler personEventHandler() {
+        return new PersonEventHandler();
+    }
 
 
 }

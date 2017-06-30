@@ -31,7 +31,7 @@ public class DemoApplication {
 					Person.SEX.MALE));
 			repo.save(new Person( "clientId2", LocalDate.of(2013, 01, 01),
 					10L,"frank",LocalDate.of(2020,10,31),
-					"Frank", "Lyons",LocalDate.of(1955, 01, 24),
+					"Frank", "Lyons",null,
 					Person.SEX.MALE));
 
 //			repo.save(new Person("Ajmal", "Cholassery",new Date(), Person.SEX.MALE));

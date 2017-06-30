@@ -45,7 +45,7 @@ public class PersonRestControllerTest {
 
     @Test
     public void getPersonTest() throws Exception{
-        Mockito.when(personService.getPersson(Mockito.anyString())).thenReturn(p1);
+        Mockito.when(personService.getPersonByLastName(Mockito.anyString(),Mockito.eq(Person.class))).thenReturn(p1);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons/get/Cholasery")
                 .accept(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -105,7 +105,7 @@ public class PersonRestControllerTest {
 
     @Test
     public void getSimplePersonTest() throws Exception{
-        Mockito.when(personService.getSimpleperson(Mockito.anyString())).thenReturn(new SimplePerson() {
+        Mockito.when(personService.getPersonByLastName(Mockito.anyString(),Mockito.eq(SimplePerson.class))).thenReturn(new SimplePerson() {
             @Override
             public String getLastname() {
                 return "Cholasery";

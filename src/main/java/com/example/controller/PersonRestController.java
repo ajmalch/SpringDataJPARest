@@ -24,13 +24,13 @@ public class PersonRestController {
     @GetMapping(path = "/get/{lastname}")
     public Person getPerson(@PathVariable String lastname){
         logger.info("Invoking PersonRestController.getPerson");
-        return personService.getPersson(lastname);
+        return personService.getPersonByLastName(lastname,Person.class);
     }
 
     @GetMapping(path = "/getsimple/{lastname}")
     public SimplePerson getSimplePerson(@PathVariable String lastname){
         logger.info("Invoking PersonRestController.getSimplePerson");
-        return  personService.getSimpleperson(lastname);
+        return  personService.getPersonByLastName(lastname, SimplePerson.class);
     }
 
     @PostMapping(path = "/search")

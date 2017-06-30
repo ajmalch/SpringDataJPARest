@@ -17,7 +17,7 @@ public class ExceptionRestControllerAdvice {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseMsg handleResourceNotFoundException(ResourceNotFoundException ex){
+    public ResponseMsg handleResourceNotFoundException(Exception ex){
 
         return new ResponseMsg(
                 Instant.now(),
@@ -27,6 +27,23 @@ public class ExceptionRestControllerAdvice {
                 ex.getMessage(),
                 null
                 );
+    }
+
+
+
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseMsg handleRunTimeException(RuntimeException ex){
+
+        return new ResponseMsg(
+                Instant.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+                ex.getClass().toString(),
+                ex.getMessage(),
+                null
+        );
     }
 
 }

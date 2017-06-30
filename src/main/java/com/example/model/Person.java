@@ -4,6 +4,7 @@ package com.example.model;
 import com.example.utility.json.LocalDateDeserializer;
 import com.example.utility.json.LocalDateSerializer;
 import com.example.utility.xml.LocalDateAdapter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(force = true)
 @Entity
 @DiscriminatorValue(value = "P")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Person extends Party {
 
     public enum SEX{
