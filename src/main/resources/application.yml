@@ -40,5 +40,4 @@ spring:
   profiles: dev
   jpa:
     database-platform: H2
-server:
-  port: ${SERVER_PORT}
+
