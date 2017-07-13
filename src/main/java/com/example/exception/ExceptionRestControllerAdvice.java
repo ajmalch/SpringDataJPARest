@@ -1,7 +1,5 @@
-package com.example.exception.advice;
+package com.example.exception;
 
-import com.example.exception.ResourceNotFoundException;
-import com.example.exception.model.ResponseMsg;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

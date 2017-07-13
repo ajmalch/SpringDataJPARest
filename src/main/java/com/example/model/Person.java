@@ -7,6 +7,7 @@ import com.example.utility.xml.LocalDateAdapter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -45,7 +46,8 @@ public class Person extends Party {
     private final LocalDate birthdt;
     private final SEX sex;
 
-    public Person(String clientId, LocalDate effectdt, Long auditid, String searchkey,
+    @Builder
+    private Person(String clientId, LocalDate effectdt, Long auditid, String searchkey,
                   LocalDate xpirdt, String firstname, String lastname, LocalDate birthdt, SEX sex){
         super(clientId, effectdt, auditid, searchkey,xpirdt);
         this.firstname = firstname;

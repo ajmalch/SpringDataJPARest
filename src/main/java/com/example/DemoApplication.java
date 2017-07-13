@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
 import java.time.LocalDate;
 
@@ -25,17 +26,26 @@ public class DemoApplication {
 	public CommandLineRunner demoPerson(PersonRepository repo){
 		return (s)->{
 
-			repo.save(new Person( "clientId1", LocalDate.of(2012, 01, 01),
-					10L,"ajmal",LocalDate.of(2020,12,31),
-					"Ajmal", "Cholassery",LocalDate.of(1985, 01, 24),
-					Person.SEX.MALE));
-			repo.save(new Person( "clientId2", LocalDate.of(2013, 01, 01),
-					10L,"frank",LocalDate.of(2020,10,31),
-					"Frank", "Lyons",null,
-					Person.SEX.MALE));
+			repo.save(Person.builder()
+					.clientId("clientId1")
+					.birthdt(LocalDate.of(1985, 01, 24))
+					.firstname("Ajmal")
+					.lastname("Cholassery")
+					.effectdt(LocalDate.of(2017, 01, 01))
+					.sex(Person.SEX.MALE)
+					.searchkey("ajmal")
+					.build());
 
-//			repo.save(new Person("Ajmal", "Cholassery",new Date(), Person.SEX.MALE));
-//            repo.save(new Person("Frank", "Lyons",new Date(),Person.SEX.MALE));
+			repo.save(Person.builder()
+					.clientId("clientId2")
+					.birthdt(LocalDate.of(1965, 12, 24))
+					.firstname("Frank")
+					.lastname("Lyons")
+					.effectdt(LocalDate.of(2016, 01, 01))
+					.sex(Person.SEX.MALE)
+					.searchkey("frank")
+					.build());
+
 		};
 	}
 
@@ -56,4 +66,9 @@ public class DemoApplication {
 //            repo.save(new Organization("SIS","Sungard Insurance System"));
         };
     }
+
+    @Bean
+	SpelAwareProxyProjectionFactory projectionFactory(){
+    	return  new SpelAwareProxyProjectionFactory();
+	}
 }

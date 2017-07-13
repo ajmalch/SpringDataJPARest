@@ -7,7 +7,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -22,6 +26,9 @@ public class PersonRestController {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    ProjectionFactory projectionFactory;
 
     @GetMapping(path = "/get/{lastname}")
     @ApiResponses({
@@ -44,6 +51,16 @@ public class PersonRestController {
         return  personService.searchPersson(person);
     }
 
+    @PostMapping("/searchsimple")
+    public Iterable<SimplePerson> searchSimplePerson(@RequestBody Person person){
+
+        List<Person> personList = (List) personService.searchPersson(person);
+
+        return personList.stream()
+                .map((p)->projectionFactory.createProjection(SimplePerson.class,p))
+                .collect(Collectors.toList());
+
+    }
 
     @PostMapping(path = "/update/{lastname}")
     public Person updatePerson(@RequestParam String firstname, @PathVariable String lastname){
