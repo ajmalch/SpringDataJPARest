@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -36,23 +37,27 @@ public class Person extends Party {
     }
 //    @Id
 //    @GeneratedValue( strategy = GenerationType.AUTO)
-//    private Long nameid;
-    private String firstname;
-    private final String lastname;
+//    private Long nameId;
+
+    @Column(name = "firstName")
+    private String firstName;
+    @Column(name = "lastName")
+    private final String lastName;
 
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private final LocalDate birthdt;
+    @Column(name = "dateOfBirth")
+    private final LocalDate dateOfBirth;
     private final SEX sex;
 
     @Builder
-    private Person(String clientId, LocalDate effectdt, Long auditid, String searchkey,
-                  LocalDate xpirdt, String firstname, String lastname, LocalDate birthdt, SEX sex){
-        super(clientId, effectdt, auditid, searchkey,xpirdt);
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.birthdt = birthdt;
+    private Person(String clientId, LocalDate effectiveDate, Long auditid, String searchkey,
+                   LocalDate expiryDate, String firstName, String lastName, LocalDate dateOfBirth, SEX sex){
+        super(clientId, effectiveDate, auditid, searchkey,expiryDate);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
         this.sex =  sex;
     }
 

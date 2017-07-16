@@ -20,21 +20,12 @@ public class PersonService {
     private PersonRepository repository;
 
     public <T> T getPersonByLastName(String lastname, Class<T> projection){
-        Optional<T> person = Optional.ofNullable(repository.findByLastname(lastname, projection));
+        Optional<T> person = Optional.ofNullable(repository.findByLastName(lastname, projection));
         return person.orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
     }
 
-    public Person updatePerson(String firstname, String lastname){
-        Optional<Person> person = Optional.ofNullable(repository.findByLastname(lastname,Person.class));
 
-        Person p = person.orElseThrow(
-                ()-> new ResourceNotFoundException("Person with lastname " + lastname + " not found"));
-
-        p.setFirstname(firstname);
-        return repository.save(p);
-    }
-
-    public Iterable<Person> searchPersson(Person person) {
+    public Iterable<Person> searchPerson(Person person) {
 
         Example<Person> example = Example.of(person);
         return repository.findAll(example);

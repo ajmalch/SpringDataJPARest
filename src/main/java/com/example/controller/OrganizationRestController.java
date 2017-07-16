@@ -19,9 +19,9 @@ public class OrganizationRestController {
     @Autowired
     OrganizationService organizationService;
 
-    @GetMapping(path = "/get/{shortname}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public Organization getOrganization(@PathVariable String shortname){
-        return organizationService.findByShortname(shortname);
+    @GetMapping(path = "/get/{shortName}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public Organization getOrganization(@PathVariable String shortName){
+        return organizationService.findByShortName(shortName);
     }
 
 }

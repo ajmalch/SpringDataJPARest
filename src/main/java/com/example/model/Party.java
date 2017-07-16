@@ -28,7 +28,8 @@ abstract class Party {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
-    private Long nameid;
+    @Column(name = "nameid")
+    private Long nameId;
 
     @XmlElement
     @Column(unique = true, nullable = false)
@@ -37,14 +38,18 @@ abstract class Party {
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private final LocalDate effectdt;
+    @Column(name = "effectdt")
+    private final LocalDate effectiveDate;
 
-    private final Long auditid;
-    private final String searchkey;
+    @Column(name = "auditId")
+    private final Long auditId;
+    @Column(name = "searchKey")
+    private final String searchKey;
 
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private final LocalDate xpirdt;
+    @Column(name = "xpirdt")
+    private final LocalDate expiryDate;
 
 }

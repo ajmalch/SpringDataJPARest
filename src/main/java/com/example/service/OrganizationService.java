@@ -14,9 +14,9 @@ public class OrganizationService {
     OrganizationRepository repository;
 
 
-    public Organization findByShortname(String shortname) {
+    public Organization findByShortName(String shortName) {
 
-        return repository.findByShortname(shortname, Organization.class);
+        return repository.findByShortName(shortName, Organization.class);
 
     }
 

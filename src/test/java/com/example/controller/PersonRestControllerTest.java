@@ -40,8 +40,8 @@ public class PersonRestControllerTest {
     @MockBean
     private PersonService personService;
 
-    private Person person1, person2, person3;
-    private List<Person> personList, personList2;
+    private Person person1, person2;
+    private List<Person> personList;
 
     ObjectMapper mapper;
 
@@ -50,31 +50,22 @@ public class PersonRestControllerTest {
 
         person1 = Person.builder()
                     .clientId("clientIdTest1")
-                    .birthdt(LocalDate.of(1985, 01, 24))
-                    .firstname("Maliha")
-                    .lastname("Cholassery")
-                    .effectdt(LocalDate.of(2017, 01, 24))
+                    .dateOfBirth(LocalDate.of(1985, 01, 24))
+                    .firstName("Maliha")
+                    .lastName("Cholassery")
+                    .effectiveDate(LocalDate.of(2017, 01, 24))
                     .sex(Person.SEX.FEMALE)
                     .build();
 
         person2 = Person.builder()
                 .clientId("clientIdTest2")
-                .birthdt(LocalDate.of(1995, 01, 24))
-                .firstname("Aqila")
-                .lastname("Cholassery")
-                .effectdt(LocalDate.of(2017, 05, 24))
+                .dateOfBirth(LocalDate.of(1995, 01, 24))
+                .firstName("Aqila")
+                .lastName("Cholassery")
+                .effectiveDate(LocalDate.of(2017, 05, 24))
                 .sex(Person.SEX.FEMALE)
                 .build();
 
-
-         person3 = Person.builder()
-                     .clientId("clientIdTest3")
-                     .birthdt(LocalDate.of(1995, 01, 24))
-                     .firstname("John")
-                     .lastname("Doe")
-                     .effectdt(LocalDate.of(2017, 01, 01))
-                     .sex(Person.SEX.MALE)
-                     .build();
 
         SpelAwareProxyProjectionFactory projectionFactory = new SpelAwareProxyProjectionFactory();
 
@@ -91,12 +82,10 @@ public class PersonRestControllerTest {
                 .thenReturn(projectionFactory.createProjection(SimplePerson.class,person1));
         Mockito.when(personService.getPersonByLastName(Mockito.eq("Ajmal"),Mockito.eq(SimplePerson.class)))
                 .thenThrow(new ResourceNotFoundException("Person with lastName Ajmal not found"));
-        Mockito.when(personService.searchPersson(Mockito.eq(Person.builder().lastname("Cholassery").build())))
+        Mockito.when(personService.searchPerson(Mockito.eq(Person.builder().lastName("Cholassery").build())))
                 .thenReturn(personList);
-        Mockito.when(personService.searchPersson(Mockito.eq(Person.builder().lastname("Ajmal").build())))
+        Mockito.when(personService.searchPerson(Mockito.eq(Person.builder().lastName("Ajmal").build())))
                 .thenReturn(new ArrayList<>());
-        Mockito.when(personService.updatePerson(Mockito.anyString(), Mockito.eq("Doe")))
-                .thenReturn(person3);
 
     }
 
@@ -110,7 +99,7 @@ public class PersonRestControllerTest {
         mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.clientId").value("clientIdTest1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.firstname").value("Maliha"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Maliha"));
 
     }
 
@@ -134,7 +123,7 @@ public class PersonRestControllerTest {
         mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.clientId").doesNotExist())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.firstname").value("Maliha"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Maliha"));
 
     }
 
@@ -153,14 +142,14 @@ public class PersonRestControllerTest {
     @Test
     public void searchPersonShouldReturnPersonList() throws Exception{
 
-        Person person = Person.builder().lastname("Cholassery").build();
+        Person person = Person.builder().lastName("Cholassery").build();
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(basePath+"search")
                 .content(mapper.writeValueAsString(person)).contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
         mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstname").value("Maliha"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("Maliha"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].clientId").value("clientIdTest2"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[2]").doesNotExist());
 
@@ -169,7 +158,7 @@ public class PersonRestControllerTest {
     @Test
     public void searchPersonShouldReturnEmptyList() throws Exception{
 
-        Person person = Person.builder().lastname("Ajmal").build();
+        Person person = Person.builder().lastName("Ajmal").build();
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(basePath+"search")
                 .content(mapper.writeValueAsString(person)).contentType(MediaType.APPLICATION_JSON)
@@ -183,7 +172,7 @@ public class PersonRestControllerTest {
     @Test
     public void searchSimplePersonShouldReturnSimplePersonList() throws Exception{
 
-        Person person = Person.builder().lastname("Cholassery").build();
+        Person person = Person.builder().lastName("Cholassery").build();
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(basePath+"searchsimple")
                 .content(mapper.writeValueAsString(person))
@@ -191,8 +180,8 @@ public class PersonRestControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
         mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstname").value(person1.getFirstname()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].firstname").value(person2.getFirstname()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value(person1.getFirstName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].firstName").value(person2.getFirstName()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].clientId").doesNotExist());
 
 
@@ -201,7 +190,7 @@ public class PersonRestControllerTest {
     @Test
     public void searchSimplePersonShouldReturnEmptyList() throws Exception{
 
-        Person person = Person.builder().lastname("Ajmal").build();
+        Person person = Person.builder().lastName("Ajmal").build();
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(basePath+"searchsimple")
                 .content(mapper.writeValueAsString(person))
@@ -211,18 +200,6 @@ public class PersonRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]").doesNotExist());
 
-
-    }
-
-    @Test
-    public void updatePersonTest() throws Exception{
-
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(basePath+"update/Doe")
-                .param("firstname","John")
-                .accept(MediaType.APPLICATION_JSON);
-        mockMvc.perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.jsonPath("$.clientId").value(person3.getClientId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.lastname").value(person3.getLastname()));
 
     }
 

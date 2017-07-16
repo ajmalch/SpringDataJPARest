@@ -28,20 +28,20 @@ public class DemoApplication {
 
 			repo.save(Person.builder()
 					.clientId("clientId1")
-					.birthdt(LocalDate.of(1985, 01, 24))
-					.firstname("Ajmal")
-					.lastname("Cholassery")
-					.effectdt(LocalDate.of(2017, 01, 01))
+					.dateOfBirth(LocalDate.of(1985, 01, 24))
+					.firstName("Ajmal")
+					.lastName("Cholassery")
+					.effectiveDate(LocalDate.of(2017, 01, 01))
 					.sex(Person.SEX.MALE)
 					.searchkey("ajmal")
 					.build());
 
 			repo.save(Person.builder()
 					.clientId("clientId2")
-					.birthdt(LocalDate.of(1965, 12, 24))
-					.firstname("Frank")
-					.lastname("Lyons")
-					.effectdt(LocalDate.of(2016, 01, 01))
+					.dateOfBirth(LocalDate.of(1965, 12, 24))
+					.firstName("Frank")
+					.lastName("Lyons")
+					.effectiveDate(LocalDate.of(2016, 01, 01))
 					.sex(Person.SEX.MALE)
 					.searchkey("frank")
 					.build());
@@ -53,17 +53,29 @@ public class DemoApplication {
 	@Profile(value = "dev")
     public CommandLineRunner demoOrganization(OrganizationRepository repo){
         return (s)->{
-            repo.save(new Organization("cliebtId3", LocalDate.of(2016, 04, 01),
-					10L,"fis",LocalDate.of(2025,12,31),
-            		"FIS","FIS Global"));
-			repo.save(new Organization("clientId4", LocalDate.of(2011, 12, 01),
-					10L,"sis",null,
-					"SIS","Sungard Insurance System"));
-			repo.save(new Organization("clientId5", LocalDate.of(2017, 01, 11),
-					10L,"fb",null,
-					"FB","Face Book"));
-//            repo.save(new Organization("FIS","FIS Global"));
-//            repo.save(new Organization("SIS","Sungard Insurance System"));
+
+            repo.save(Organization.builder()
+					.clientId("clientId3")
+					.effectiveDate(LocalDate.of(2011, 12, 01))
+					.shortName("SIS")
+					.searchkey("sis")
+					.name("Sungard Insurance System")
+					.build());
+			repo.save(Organization.builder()
+					.clientId("clientId4")
+					.effectiveDate(LocalDate.of(2012, 12, 23))
+					.shortName("FIS")
+					.searchkey("fis")
+					.name("Fidelity Information Services")
+					.build());
+			repo.save(Organization.builder()
+					.clientId("clientId5")
+					.effectiveDate(LocalDate.of(2017, 01, 11))
+					.shortName("FB")
+					.searchkey("fb")
+					.name("Facebook")
+					.build());
+
         };
     }
 

@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
  */
 
 public interface OrganizationRepository extends JpaRepository<Organization,Long> {
-   <T> T findByShortname(String shortname, Class<T> projection);
+   <T> T findByShortName(String shortname, Class<T> projection);
 
    @RestResource(exported = false)
    @Override

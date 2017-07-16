@@ -30,31 +30,31 @@ public class PersonRestController {
     @Autowired
     ProjectionFactory projectionFactory;
 
-    @GetMapping(path = "/get/{lastname}")
+    @GetMapping(path = "/get/{lastName}")
     @ApiResponses({
             @ApiResponse(code = 404 , message= "Person Not Found")
     })
-    public Person getPerson(@PathVariable String lastname){
+    public Person getPerson(@PathVariable String lastName){
         log.info("Invoking PersonRestController.getPerson");
-        return personService.getPersonByLastName(lastname,Person.class);
+        return personService.getPersonByLastName(lastName,Person.class);
     }
 
-    @GetMapping(path = "/getsimple/{lastname}")
-    public SimplePerson getSimplePerson(@PathVariable String lastname){
+    @GetMapping(path = "/getsimple/{lastName}")
+    public SimplePerson getSimplePerson(@PathVariable String lastName){
         log.info("Invoking PersonRestController.getSimplePerson");
-        return  personService.getPersonByLastName(lastname, SimplePerson.class);
+        return  personService.getPersonByLastName(lastName, SimplePerson.class);
     }
 
     @PostMapping(path = "/search")
     public Iterable<Person> searchPerson(@RequestBody Person person){
         log.info("Invoking PersonRestController.searchPerson");
-        return  personService.searchPersson(person);
+        return  personService.searchPerson(person);
     }
 
     @PostMapping("/searchsimple")
     public Iterable<SimplePerson> searchSimplePerson(@RequestBody Person person){
 
-        List<Person> personList = (List) personService.searchPersson(person);
+        List<Person> personList = (List) personService.searchPerson(person);
 
         return personList.stream()
                 .map((p)->projectionFactory.createProjection(SimplePerson.class,p))
@@ -62,9 +62,4 @@ public class PersonRestController {
 
     }
 
-    @PostMapping(path = "/update/{lastname}")
-    public Person updatePerson(@RequestParam String firstname, @PathVariable String lastname){
-        log.info("Invoking PersonRestController.updatePerson");
-        return personService.updatePerson(firstname,lastname);
-    }
 }

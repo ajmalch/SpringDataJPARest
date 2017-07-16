@@ -20,12 +20,12 @@ public class RepositoryRestConfig extends RepositoryRestConfigurerAdapter {
         config.setBasePath("/api");
 
 //        config.withEntityLookup().
-//                forRepository(PersonRepository.class, Person::getLastname,
-//                        (personRepository, s) -> personRepository.findByLastname(s,Person.class));
+//                forRepository(PersonRepository.class, Person::getLastName,
+//                        (personRepository, s) -> personRepository.findByLastName(s,Person.class));
 
         config.withEntityLookup().
-                forRepository(OrganizationRepository.class, Organization::getShortname,
-                        ((organizationRepository, s) -> organizationRepository.findByShortname(s,Organization.class)));
+                forRepository(OrganizationRepository.class, Organization::getShortName,
+                        ((organizationRepository, s) -> organizationRepository.findByShortName(s,Organization.class)));
     }
 
     @Bean

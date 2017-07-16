@@ -1,11 +1,10 @@
 package com.example.model;
 
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlElement;
@@ -22,20 +21,26 @@ import java.time.LocalDate;
 @NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 @DiscriminatorValue(value = "O")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Organization extends Party{
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long nameid;
-    private String shortname;
-    @XmlElement
-    private final String orgname;
+//    private Long nameId;
 
-    public Organization(String clientId, LocalDate effectdt, Long auditid, String searchkey,
-                        LocalDate xpirdt, String shortname, String orgname){
-        super(clientId, effectdt, auditid, searchkey,xpirdt);
-        this.shortname = shortname;
-        this.orgname = orgname;
+    @Column(name = "shortname")
+    private String shortName;
+
+    @XmlElement
+    @Column(name = "orgname")
+    private final String name;
+
+    @Builder
+    public Organization(String clientId, LocalDate effectiveDate, Long auditId, String searchkey,
+                        LocalDate expiryDate, String shortName, String name){
+        super(clientId, effectiveDate, auditId, searchkey,expiryDate);
+        this.shortName = shortName;
+        this.name = name;
 
     }
 

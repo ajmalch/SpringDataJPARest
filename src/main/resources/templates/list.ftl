@@ -19,18 +19,18 @@
 	                </div>
 
 	                <div class="row">
-                        <div class="form-group col-md-12" ng-class="{ 'has-error' : myForm.firstname.$invalid && !myForm.firstname.$pristine }">
-                            <label class="col-md-2 control-lable" for="firstname">First Name</label>
+                        <div class="form-group col-md-12" ng-class="{ 'has-error' : myForm.firstName.$invalid && !myForm.firstName.$pristine }">
+                            <label class="col-md-2 control-lable" for="firstName">First Name</label>
                             <div class="col-md-7">
-                                <input type="text" ng-model="ctrl.person.firstname" name="firstname" id="firstname" class="form-control input-sm" placeholder="Enter your First Name" required ng-minlength="3"/>
-                                <p ng-show="myForm.firstname.$invalid && !myForm.firstname.$pristine" class="help-block">Firstname is required</p>
+                                <input type="text" ng-model="ctrl.person.firstName" name="firstName" id="firstName" class="form-control input-sm" placeholder="Enter your First Name" required ng-minlength="3"/>
+                                <p ng-show="myForm.firstName.$invalid && !myForm.firstName.$pristine" class="help-block">Firstname is required</p>
                             </div>
                         </div>
-	                    <div class="form-group col-md-12" ng-class="{ 'has-error' : myForm.lastname.$invalid && !myForm.lastname.$pristine }">
-	                        <label class="col-md-2 control-lable" for="lastname">Last Name</label>
+	                    <div class="form-group col-md-12" ng-class="{ 'has-error' : myForm.lastName.$invalid && !myForm.lastName.$pristine }">
+	                        <label class="col-md-2 control-lable" for="lastName">Last Name</label>
 	                        <div class="col-md-7">
-	                            <input type="text" ng-model="ctrl.person.lastname" name="lastname" id="lastname" class="form-control input-sm" placeholder="Enter your Last Name" required ng-minlength="3"/>
-                                <p ng-show="myForm.lastname.$invalid && !myForm.lastname.$pristine" class="help-block">Lastname is required</p>
+	                            <input type="text" ng-model="ctrl.person.lastName" name="lastName" id="lastName" class="form-control input-sm" placeholder="Enter your Last Name" required ng-minlength="3"/>
+                                <p ng-show="myForm.lastName.$invalid && !myForm.lastName.$pristine" class="help-block">Lastname is required</p>
                             </div>
 	                    </div>
 	                </div>
@@ -75,8 +75,8 @@
 		            <tbody>
 		            <tr ng-repeat="u in ctrl.getAllPersons()._embedded.persons">
 		                <td>{{u.clientId}}</td>
-		                <td>{{u.firstname}}</td>
-		                <td>{{u.lastname}}</td>
+		                <td>{{u.firstName}}</td>
+		                <td>{{u.lastName}}</td>
 		                <td>{{u.sex}}</td>
 		                <td><button type="button" ng-click="ctrl.editPerson(u._links.self.href)" class="btn btn-success custom-width">Edit</button></td>
 		                <td><button type="button" ng-click="ctrl.removePerson(u._links.self.href)" class="btn btn-danger custom-width">Remove</button></td>

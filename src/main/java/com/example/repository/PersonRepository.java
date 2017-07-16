@@ -13,9 +13,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(path="/people")
 public interface PersonRepository extends CrudRepository<Person,Long>, QueryByExampleExecutor<Person> {
 
-  <T> T findByLastname(String lastname, Class<T> projection);
+  <T> T findByLastName(String lastname, Class<T> projection);
 
-//    Optional<Person> findByLastname(String lastname);
+//    Optional<Person> findByLastName(String lastname);
 
 //    List<SimplePerson> findAllProjectedBy(Pageable pageable);
 }
