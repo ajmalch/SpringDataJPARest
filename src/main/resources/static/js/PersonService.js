@@ -81,7 +81,7 @@ angular.module('crudApp').factory('PersonService',
                             deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while updating Person with id :'+id);
+                            console.error('Error while updating Person with link :'+ link);
                             deferred.reject(errResponse);
                         }
                     );
