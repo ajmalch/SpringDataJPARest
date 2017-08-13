@@ -40,6 +40,9 @@ spring:
   profiles: dev
   jpa:
     database-platform: H2
+  cache:
+    ehcache:
+      config: ehcache.xml
 security:
   basic:
     enabled: false

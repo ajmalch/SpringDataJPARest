@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.model.Address;
 import com.example.model.Person;
 import com.example.model.SimplePerson;
 import com.example.service.PersonService;
@@ -11,6 +12,7 @@ import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -62,4 +64,14 @@ public class PersonRestController {
 
     }
 
+    @GetMapping("/{lastName}/addresses")
+    public Set<Address> getPersonAddressList(@PathVariable String lastName){
+
+        return personService.getPersonAddressList(lastName);
+    }
+
+    @DeleteMapping(value = "/cache")
+    public void clearCache() {
+        personService.clearCache();
+    }
 }
