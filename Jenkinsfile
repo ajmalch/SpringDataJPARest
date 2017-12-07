@@ -5,7 +5,7 @@ pipeline {
     agent {
                   docker {
                       image 'maven:3-alpine'
-                      args '-v /root/.m2:/root/.m2'
+                      args '-v /uesrs/AjmalCholassery/.m2:/root/.m2'
                   }
           }
 
@@ -14,7 +14,7 @@ pipeline {
             steps {
                script {
                           commitid = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                                   sh "mvn clean package -Dcommitid=${commitid}"
+                           sh "mvn clean package -Dcommitid=${commitid}"
                 }
             }
         }
