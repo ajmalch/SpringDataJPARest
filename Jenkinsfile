@@ -2,12 +2,20 @@
 pipeline {
 
     
-    agent any
+    agent {
+                  docker {
+                      image 'maven:3-alpine'
+                      args '-v /root/.m2:/root/.m2'
+                  }
+          }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+               script {
+                          commitid = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                                   sh "mvn clean package -Dcommitid=${commitid}"
+                }
             }
         }
         stage('Test') {
