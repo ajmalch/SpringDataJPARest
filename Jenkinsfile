@@ -12,10 +12,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               script {
 
-                                   sh "mvn clean package"
-                               }
+                    commitid = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    sh "mvn clean package -Dcommitid=${commitid}"
+
 
             }
         }
