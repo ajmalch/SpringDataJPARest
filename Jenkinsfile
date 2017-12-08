@@ -13,8 +13,8 @@ pipeline {
         stage('Build') {
             steps {
                script {
-                                   commitid = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                                   sh "mvn clean package -Dcommitid=${commitid}"
+
+                                   sh "mvn clean package"
                                }
 
             }
