@@ -13,8 +13,7 @@ pipeline {
         stage('Build') {
             steps {
 
-                    echo 'Biilding .'
-                    sh 'mvn -B -DskipTests clean package'
+                    mvn -B -DskipTests clean package
 
 
             }
