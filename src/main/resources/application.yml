@@ -39,10 +39,40 @@ github:
 spring:
   profiles: dev
   jpa:
-    database-platform: H2
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: H2
+    url:  jdbc:h2:mem:training;MODE=Oracle;INIT=CREATE SCHEMA IF NOT EXISTS TRAINING
   cache:
     ehcache:
       config: ehcache.xml
 security:
   basic:
     enabled: false
+#  oauth2:
+##    client:
+##      client-secret: aaf853ae0abb5cc9f448ebf66a6689b2
+##      access-token-uri: https://graph.facebook.com/oauth/access_token
+##      user-authorization-uri: https://www.facebook.com/dialog/oauth
+##      token-name: oauth_token
+##      authentication-scheme: query
+##      client-authentication-scheme: form
+##      client-id: 1391413134262958
+#    resource:
+#      user-info-uri: https://graph.facebook.com/me
+
+---
+spring:
+  profiles: aws
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  datasource:
+    name: entity
+    url: jdbc:mysql://entitity.c3rumte7brsm.us-east-1.rds.amazonaws.com:3306
+    username: ajmalch
+    password: Cholassery01

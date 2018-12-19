@@ -21,7 +21,7 @@ public class Address {
     private Long addressKey;
 
     @Column(name = "ADDRID", unique = true)
-    private String AddressId;
+    private String addressId;
 
     private String line1;
 

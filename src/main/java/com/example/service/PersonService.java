@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class PersonService {
     private AddresssRepository addressRepository;
 
     public <T> T getPersonByLastName(String lastname, Class<T> projection){
+        log.info("PersonService.getPersonByLastName");
         Optional<T> person = Optional.ofNullable(repository.findByLastName(lastname, projection));
         return person.orElseThrow(()-> new ResourceNotFoundException("Person Not Found"));
     }
@@ -43,6 +45,12 @@ public class PersonService {
     public Set<Address> getPersonAddressList(String lastName) {
 
         return repository.findByLastName(lastName,Person.class).getAddresses();
+    }
+
+
+    public List<Address> getAddressList() {
+
+        return addressRepository.findByAddressIdNotNull();
     }
 
     @CacheEvict(value = "persons", allEntries = true)

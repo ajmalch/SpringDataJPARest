@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class PersonRestController {
         return  personService.getPersonByLastName(lastName, SimplePerson.class);
     }
 
-    @PostMapping(path = "/search")
+    @PostMapping(path = "/search",consumes = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Person> searchPerson(@RequestBody Person person){
         log.info("Invoking PersonRestController.searchPerson");
         return  personService.searchPerson(person);
@@ -68,6 +69,12 @@ public class PersonRestController {
     public Set<Address> getPersonAddressList(@PathVariable String lastName){
 
         return personService.getPersonAddressList(lastName);
+    }
+
+    @GetMapping("/addresses")
+    public List<Address> getAddressList(){
+
+        return personService.getAddressList();
     }
 
     @DeleteMapping(value = "/cache")

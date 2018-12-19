@@ -39,3 +39,5 @@ src/main/java/META-INF/
 /target/generated-test-sources/
 /target/classes/
 /target/docker/
+/target/
+/target/spring-data-rest-1.0.0.jar

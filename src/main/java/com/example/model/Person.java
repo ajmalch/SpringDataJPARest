@@ -8,9 +8,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -27,6 +30,7 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue(value = "P")
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@EntityListeners(AuditingEntityListener.class)
 public class Person extends Party {
 
     public enum SEX{
@@ -46,8 +50,14 @@ public class Person extends Party {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @Column(name = "dateOfBirth")
-    private final LocalDate dateOfBirth;
+    @ApiModelProperty(example ="2018-01-01")
+    private final  LocalDate dateOfBirth;
     private final SEX sex;
+
+    @LastModifiedDate
+    @ApiModelProperty(example ="2018-01-01")
+    private LocalDate lastModifiedDate;
+
 
     @Builder
     private Person(String clientId, LocalDate effectiveDate, Long auditid,
