@@ -3,8 +3,10 @@ package com.example.model;
 import com.example.utility.json.LocalDateDeserializer;
 import com.example.utility.json.LocalDateSerializer;
 import com.example.utility.xml.LocalDateAdapter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +41,7 @@ abstract class Party {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @Column(name = "effectdt")
+    @ApiModelProperty(example = "2018-01-01")
     private final LocalDate effectiveDate;
 
     @Column(name = "auditId")
@@ -47,9 +50,11 @@ abstract class Party {
     private final String searchKey;
 
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonDeserialize(using = LocalDateDeserializer.class)
+//    @JsonSerialize(using = LocalDateSerializer.class)
+//    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING , pattern = "yyyy-MM-dd")
     @Column(name = "xpirdt")
+    @ApiModelProperty( dataType = "java.util.Map", example = "{description}")
     private final LocalDate expiryDate;
 
 }
