@@ -1,6 +1,6 @@
 spring:
-#  profiles:
-#    active: dev
+  profiles:
+    active: default
 
   jpa:
     show-sql: true
@@ -10,6 +10,11 @@ spring:
     rest:
       detection-strategy: default
       max-page-size: 2
+
+---
+
+spring:
+  profiles: secure
 
 #security:
 #  oauth2:

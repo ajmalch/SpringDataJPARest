@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
 import java.time.LocalDate;
@@ -20,7 +19,6 @@ import java.time.LocalDate;
 
 @SpringBootApplication
 @EnableCaching
-@EnableJpaAuditing
 public class DemoApplication {
 
 	public static void main(String[] args) {

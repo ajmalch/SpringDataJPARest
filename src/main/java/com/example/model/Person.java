@@ -12,7 +12,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -54,7 +53,6 @@ public class Person extends Party {
     private final  LocalDate dateOfBirth;
     private final SEX sex;
 
-    @LastModifiedDate
     @ApiModelProperty(example ="2018-01-01")
     private LocalDate lastModifiedDate;
 

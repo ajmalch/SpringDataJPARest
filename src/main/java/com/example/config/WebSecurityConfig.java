@@ -46,7 +46,7 @@ import java.util.List;
 @Configuration
 //@EnableOAuth2Sso
 @EnableOAuth2Client
-@Profile("default")
+@Profile("secure")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Qualifier("oauth2ClientContext")
